@@ -63,6 +63,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorVH> 
             }
         });
 
+        //delete
         holder.cardDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +101,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorVH> 
         });
     }
 
+    //view
     @Override
     public int getItemCount() {
         return doctors.size();

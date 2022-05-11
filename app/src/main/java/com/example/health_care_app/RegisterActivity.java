@@ -15,6 +15,7 @@ import com.example.health_care_app.model.Doctor;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button button;
+    boolean isAllFieldsChecked = false;
 
     EditText edFName, edLName, edEmail, edLNumber, edPNumber;
     @Override
@@ -42,30 +43,61 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Create
     public void save(View view){
-        String fname = edFName.getText().toString().trim();
-        String lname = edLName.getText().toString().trim();
-        String email = edEmail.getText().toString().trim();
-        String lnumber = edLNumber.getText().toString().trim();
-        String pnumber = edPNumber.getText().toString().trim();
+        isAllFieldsChecked = CheckAllFields();
+        if(isAllFieldsChecked) {
 
-        DBHelper dbHelper = new DBHelper(RegisterActivity.this);
 
-        Doctor s = new Doctor(fname, lname, email, lnumber, pnumber);
+            String fname = edFName.getText().toString().trim();
+            String lname = edLName.getText().toString().trim();
+            String email = edEmail.getText().toString().trim();
+            String lnumber = edLNumber.getText().toString().trim();
+            String pnumber = edPNumber.getText().toString().trim();
 
-        long result = dbHelper.registerdoctor(s);
+            DBHelper dbHelper = new DBHelper(RegisterActivity.this);
 
-        if( result > 0)
-        {
-            Toast.makeText(this, "saved" + result, Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(this,"failed" + result, Toast.LENGTH_SHORT).show();
+            Doctor s = new Doctor(fname, lname, email, lnumber, pnumber);
+
+            long result = dbHelper.registerdoctor(s);
+
+            if (result > 0) {
+                Toast.makeText(this, "saved" + result, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "failed" + result, Toast.LENGTH_SHORT).show();
+            }
+
         }
 
     }
 
     public void all(View view) {startActivity(new Intent(RegisterActivity.this,DoctorListActivity.class));
+    }
+
+
+    //Validations
+    private boolean CheckAllFields() {
+        if(edFName.length() == 0){
+            edFName.setError("This field is required");
+            return false;
+        }
+        if(edLName.length() == 0){
+            edLName.setError("This field is required");
+            return false;
+        }
+        if (edEmail.length() == 0) {
+            edEmail.setError("Email is required");
+            return false;
+        }
+        if(edLNumber.length() == 0){
+            edLNumber.setError("License Number is required");
+            return false;
+        }
+
+        else if(edPNumber.length() < 10){
+            edPNumber.setError("Please enter a valid mobile number");
+            return false;
+        }
+        return true;
     }
 }

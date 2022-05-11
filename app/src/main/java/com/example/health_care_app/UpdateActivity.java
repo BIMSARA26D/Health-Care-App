@@ -36,7 +36,7 @@ public class UpdateActivity extends AppCompatActivity {
 //        edLNumber.setText(s.getLnumber());
 //        edPNumber.setText(s.getPnumber());
     }
-
+    //Update
     public void update(View view){
 //        String fname = edFName.getText().toString().trim();
 //        String lname = edLName.getText().toString().trim();

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".UpdateActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".DoctorListActivity"
             android:exported="true" />
